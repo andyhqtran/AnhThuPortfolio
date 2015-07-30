@@ -1,1 +1,5 @@
 node_modules/
+*.css
+*.map
+*.html.sublime-grunt.cache
+.sass-cache/
