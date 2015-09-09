@@ -30,6 +30,18 @@ module.exports = function (grunt) {
       }
     },
 
+    wiredep: {
+      task: {
+        src: [
+          'index.html'
+        ],
+        options: {
+          dependencies: true,
+          devDependencies: true
+        }
+      }
+    },
+
     sass: {
       dev: {
         options: {
@@ -105,7 +117,7 @@ module.exports = function (grunt) {
 
       jade: {
         files: '{,*/,*/*/,*/*/*/}*.jade',
-        tasks: ['jade:dev', 'wiredep', 'notify:jade'],
+        tasks: ['jade:dist', 'wiredep', 'notify:jade'],
       }
     }
   });
