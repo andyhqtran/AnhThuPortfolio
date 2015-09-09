@@ -1,5 +1,8 @@
 @import "base/variables";
 
+/* Reset */
+@import "vendors/reset";
+
 /* Typograpy */
 @import "base/typography";
 
@@ -11,6 +14,12 @@
 
 /* Navbar */
 @import "partials/navbar";
+
+/* Section */
+@import "partials/section";
+
+/* Projects */
+@import "partials/projects";
 
 /* Hero */
 @import "partials/hero";

@@ -28,10 +28,10 @@ $accent: #000059;
 // Main Colors
 $white: #ffffff;
 $black: #000000;
-$dark-gray: lighten($black, 20%);
-$gray: lighten($black, 40%);
-$light-gray: lighten($black, 60%);
-$lighter-gray: lighten($black, 80%);
+$dark-gray: rgba($black, 0.8);
+$gray: rgba($black, 0.6);
+$light-gray: rgba($black, 0.4);
+$lighter-gray: rgba($black, 0.2);
 
 // Optional Colors
 $red: #d16256;
