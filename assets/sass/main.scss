@@ -1,5 +1,8 @@
 @import "base/variables";
 
+/* FontAwesome */
+@import "../../bower_components/font-awesome/scss/font-awesome";
+
 /* Reset */
 @import "vendors/reset";
 
@@ -15,11 +18,14 @@
 /* Navbar */
 @import "partials/navbar";
 
+/* Hero */
+@import "partials/hero";
+
 /* Section */
 @import "partials/section";
 
 /* Projects */
 @import "partials/projects";
 
-/* Hero */
-@import "partials/hero";
+/* Footer */
+@import "partials/footer";

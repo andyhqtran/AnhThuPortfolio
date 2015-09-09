@@ -42,7 +42,7 @@ html
     link(type='text/css', media='screen', rel='stylesheet', href='assets/css/main.css')
   body
     // Navbar
-    .navbar
+    header.navbar
       .container: .row
           .brand Simple
             span  / Portfolio
@@ -71,24 +71,30 @@ html
         .row
           .col-4
             ul#tab-nav
-              li: a.btn.active(href='#tab-all') All
-              li: a.btn(href='#tab-branding') Branding
-              li: a.btn(href='#tab-graphicdesign') Graphic Design
+              li: a.btn.active(href='#tab-all' data-filter='all') All
+              li: a.btn(href='#tab-branding' data-filter='branding') Branding
+              li: a.btn(href='#tab-graphicdesign' data-filter='graphicdesign') Graphic Design
         .row
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
-            .col-1
-              +project('#', 'http://placehold.it/400x400')
+          +project('#', 'graphicdesign', 'http://placehold.it/400x400')
+          +project('#', 'branding', 'http://placehold.it/400x400')
+          +project('#', 'graphicdesign', 'http://placehold.it/400x400')
+          +project('#', 'graphicdesign', 'http://placehold.it/400x400')
+          +project('#', 'branding', 'http://placehold.it/400x400')
+          +project('#', 'graphicdesign', 'http://placehold.it/400x400')
+          +project('#', 'graphicdesign', 'http://placehold.it/400x400')
+
+    // Footer
+    footer.footer
+      .container: .row
+        .col-4
+          h2 Let's Connect
+          p Feel free to shot me a message!
+          ul
+            li: a: i.fa.fa-dribbble
+      .footer-bottom
+        .container: .row
+
     // JavaScript
     // bower:js
     // endbower
+    script(src='assets/js/script.js')

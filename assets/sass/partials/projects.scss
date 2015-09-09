@@ -26,8 +26,11 @@
 
 .project {
   display: block;
-  margin: 0 0 $gutters;
+  flex-basis: 25%;
+  width: 25%;
+  padding: 0 ($gutters / 2) $gutters;
   border-radius: 3px;
+  box-sizing: border-box;
   overflow: hidden;
 
   img {
