@@ -1,7 +1,24 @@
-module.exports = function(grunt) {
-  require('jit-grunt')(grunt);
+module.exports = function (grunt) {
 
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    project: {
+      assets: ['assets'],
+      css: ['<%= project.assets %>/css'],
+      sass: ['<%= project.assets %>/sass'],
+      js: ['<%= project.assets %>/js']
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: 'app',
+        }
+      }
+    },
+
     jade: {
       dist: {
         options: {
@@ -12,39 +29,94 @@ module.exports = function(grunt) {
         }
       }
     },
+
     sass: {
-      dist: {
+      dev: {
         options: {
           sourcemap: 'auto',
-          style: 'compact'
+          style: 'expanded'
         },
         files: {
-          'assets/css/main.css': 'assets/stylesheets/main.scss'
+          '<%= project.css %>/main.css': '<%= project.sass %>/main.scss'
         }
       }
     },
-    watch: {
-      jade: {
-        files: ['*.jade'],
-        tasks: ['jade'],
+
+    autoprefixer: {
+      dev: {
         options: {
-          nospawn: true,
-          livereload: true
+          browsers: ['last 2 versions', 'ie 8', 'ie 9']
+        },
+        files: {
+          '<%= project.css %>/main.css': '<%= project.css %>/main.css'
+        }
+      }
+    },
+
+    notify: {
+      options: {
+        title: 'GruntJS'
+      },
+      server: {
+        options: {
+          message: 'Server has been initiated.'
+        }
+      },
+      grunt: {
+        options: {
+          message: 'Gruntfile has been updated.'
+        }
+      },
+      jade: {
+        options: {
+          message: 'Jade files has been compiled.'
         }
       },
       sass: {
-        files: ['assets/stylesheets/*.scss', 'assets/stylesheets/*/*.scss'],
-        tasks: ['sass'],
         options: {
-          nospawn: true,
-          livereload: true
+          message: 'Sass files has been compiled.'
         }
+      }
+    },
+
+    watch: {
+      options: {
+        livereload: true,
+        dateFormat: function (time) {
+          grunt.log.writeln('Grunt has finished compiling in ' + time + 'ms!');
+          grunt.log.writeln('Awaiting...');
+          grunt.log.write('\x07'); // beep!
+        },
+        event: ['all']
+      },
+
+      configFiles: {
+        files: ['Gruntfile.js'],
+        tasks: ['notify:grunt'],
+        options: {
+          reload: true
+        }
+      },
+
+      sass: {
+        files: '<%= project.assets %>/sass/{,*/,*/*/}*.{scss,sass}',
+        tasks: ['sass:dev', 'autoprefixer:dev', 'notify:sass'],
+      },
+
+      jade: {
+        files: '{,*/,*/*/,*/*/*/}*.jade',
+        tasks: ['jade:dev', 'wiredep', 'notify:jade'],
       }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-notify');
 
-  grunt.registerTask('default', ['jade', 'sass', 'watch']);
+  grunt.registerTask('default', ['connect:server', 'notify:server', 'watch']);
 };
