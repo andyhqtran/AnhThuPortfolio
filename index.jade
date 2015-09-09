@@ -40,16 +40,24 @@ html
     // endbower
     link(type='text/css', media='screen', rel='stylesheet', href='assets/css/main.css')
   body
+    // Navbar
     .navbar
       .container: .row
           .brand Simple
             span  / Portfolio
           nav.nav
             ul
-              li: a.active Home
-              li: a About
-              li: a Projects
-              li: a Contact
+              li: a.active(href='#home') Home
+              li: a(href='#about') About
+              li: a(href='#projects') Projects
+              li: a(href='#contact') Contact
+
+    // Hero Section
+    section.hero
+      .container: .row
+        h1 Hello there,
+        p <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. <br> <b>Lorem Ipsum</b> has been the industry's standard dummy text ever.
+        a(href='#projects').btn View My Work
 
     // JavaScript
     // bower:js
