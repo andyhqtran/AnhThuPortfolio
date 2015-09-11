@@ -49,19 +49,19 @@ html
           nav.nav
             ul
               li: a.active(href='#home') Home
-              li: a(href='#about') About
+              li: a(href='https://about.me/andy.tran') About
               li: a(href='#projects') Projects
               li: a(href='#contact') Contact
 
     // Hero Section
-    section.hero
+    section.hero#home
       .container: .row
         h1 Hello there,
         p <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. <br> <b>Lorem Ipsum</b> has been the industry's standard dummy text ever.
         a(href='#projects').btn View My Work
 
     // Section
-    section.projects
+    section.projects#projects
       .container
         .row
           .col-4
@@ -84,7 +84,7 @@ html
           +project('#', 'graphicdesign', 'http://placehold.it/400x400')
 
     // Footer
-    footer.footer
+    footer.footer#contact
       .container: .row
         .col-4
           h2 Let's Connect
@@ -98,7 +98,7 @@ html
     .footer-bottom
       .container: .row
         p Copyright © 2015 <a href='/index.html'>Simple</a>. All rights reserved.
-        p Built with <i class='fa fa-code'></i> <a href='http://andytran.me'>Andy Tran</a>
+        p Built with <i class='fa fa-code'></i> by <a href='http://andytran.me'>Andy Tran</a>
     // JavaScript
     // bower:js
     // endbower

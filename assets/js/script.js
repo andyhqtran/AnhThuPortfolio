@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  $('.nav ul').onePageNav();
+
   $('#tab-nav a').click(function (e) {
     e.preventDefault();
 
