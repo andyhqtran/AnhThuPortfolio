@@ -1,4 +1,7 @@
 module.exports = function (grunt) {
+  'use strict';
+
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -19,6 +22,15 @@ module.exports = function (grunt) {
       }
     },
 
+    clean: {
+      html: '{,*/,*/*/,*/*/*/}*.html',
+      css: '<%= project.css %>{,*/,*/*/,*/*/*/}*.{css,map}',
+      cache: '.sass-cache',
+      bower: 'bower_components',
+      npm: 'node_modules'
+    },
+
+
     jade: {
       dist: {
         options: {
@@ -37,7 +49,16 @@ module.exports = function (grunt) {
         ],
         options: {
           dependencies: true,
-          devDependencies: true
+          devDependencies: true,
+          'overrides': {
+            'font-awesome': {
+              'main': [
+                'less/font-awesome.less',
+                'scss/font-awesome.scss',
+                'css/font-awesome.css'
+              ]
+            }
+          }
         }
       }
     },
@@ -54,14 +75,17 @@ module.exports = function (grunt) {
       }
     },
 
-    autoprefixer: {
+    postcss: {
+      options: {
+        map: true,
+        processors: [
+          require('autoprefixer')({
+            browsers: ['last 2 versions', 'ie 8']
+          })
+        ]
+      },
       dev: {
-        options: {
-          browsers: ['last 2 versions', 'ie 8', 'ie 9']
-        },
-        files: {
-          '<%= project.css %>/main.css': '<%= project.css %>/main.css'
-        }
+        src: '<%= project.css %>/*.css'
       }
     },
 
@@ -112,7 +136,7 @@ module.exports = function (grunt) {
 
       sass: {
         files: '<%= project.assets %>/sass/{,*/,*/*/}*.{scss,sass}',
-        tasks: ['sass:dev', 'autoprefixer:dev', 'notify:sass'],
+        tasks: ['sass:dev', 'postcss:dev', 'notify:sass'],
       },
 
       jade: {
@@ -122,13 +146,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-wiredep');
-  grunt.loadNpmTasks('grunt-notify');
-
+  grunt.registerTask('dist', ['jade', 'wiredep', 'sass', 'postcss']);
   grunt.registerTask('default', ['connect:server', 'notify:server', 'watch']);
 };

@@ -17,5 +17,8 @@
     "font-awesome": "fontawesome#~4.4.0",
     "jquery": "~2.1.4",
     "jQuery-One-Page-Nav": "~3.0.0"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4"
   }
 }

@@ -1,7 +1,5 @@
 node_modules/
 bower_components/
-*.css
 *.map
-*.html
 .sublime-grunt.cache
 .sass-cache/
